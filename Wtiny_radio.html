@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WTINY Radio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  /* REMOVE CLICK HIGHLIGHT / SELECTION */
+  a,
+  img,
+  iframe {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a,
+  .buttons img,
+  .logo-image {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  a:focus,
+  a:focus-visible,
+  a:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background: url('./background.png') center center no-repeat fixed;
+    background-size: cover;
+    background-color: #000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 20px;
+  }
+
+  .container {
+    transform: translateY(-100px);
+    width: min(1180px, 100%);
+    text-align: center;
+  }
+
+  .logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+
+  .logo-image {
+    width: min(80%);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.6));
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 18px;
+    align-items: center;
+    max-width: 1050px;
+    margin: 0 auto;
+  }
+
+  /* PLAYER WITH SCREWS */
+  .player-shell {
+    background:
+      linear-gradient(180deg, rgba(55, 23, 10, 0.9), rgba(20, 8, 5, 0.95));
+
+    border: 3px solid rgba(146, 81, 28, 0.95);
+    border-radius: 22px;
+    box-shadow:
+      0 18px 35px rgba(0, 0, 0, 0.55),
+      0 0 0 2px rgba(62, 29, 10, 0.85) inset,
+      0 0 22px rgba(242, 155, 46, 0.18);
+    padding: 16px;
+    position: relative;
+  }
+
+  .player-shell::before {
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border: 2px solid rgba(208, 138, 57, 0.62);
+    border-radius: 15px;
+    pointer-events: none;
+    box-shadow: inset 0 0 16px rgba(255, 183, 77, 0.08);
+  }
+
+  .player {
+    position: relative;
+    z-index: 1;
+    background: rgba(10, 8, 8, 0.28);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: inset 0 0 18px rgba(255, 174, 66, 0.06);
+  }
+
+  iframe {
+    width: 100%;
+    height: 144px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+  }
+
+  /* BUTTON FRAME (already had screws) */
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    transform: translateY(2px);
+
+    background:
+
+      linear-gradient(180deg, rgba(55, 23, 10, 0.9), rgba(20, 8, 5, 0.95));
+
+    padding: 14px;
+    border-radius: 18px;
+    border: 2px solid rgba(146, 81, 28, 0.9);
+    box-shadow:
+      0 16px 28px rgba(0,0,0,0.55),
+      inset 0 0 0 2px rgba(62, 29, 10, 0.85),
+      0 0 18px rgba(242, 155, 46, 0.15);
+    position: relative;
+  }
+
+  .buttons::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(208, 138, 57, 0.55);
+    pointer-events: none;
+  }
+
+  .buttons a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .buttons img {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .buttons a:hover img {
+    transform: translateY(-2px) scale(1.02);
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-wrap">
+      <img class="logo-image" src="./logo.png" alt="WTINY Radio">
+    </div>
+
+    <div class="main">
+      <div class="player-shell">
+        <div class="player">
+          <iframe src="https://app.radiocult.fm/embed/player/mixman?theme=dusk&primaryColor=%23f5b623&corners=rounded&playerDisplay=metadata" title="WTINY Radio Player"></iframe>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <a href="#">
+          <img src="./now-playing.png" alt="Now Playing">
+        </a>
+        <a href="#">
+          <img src="./song-requests.png" alt="Song Requests">
+        </a>
+        <a href="#">
+          <img src="./contact.png" alt="Contact">
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
