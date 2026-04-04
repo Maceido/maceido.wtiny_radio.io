@@ -343,19 +343,84 @@
       </div>
     </div>
   </div>
-
   <script>
     const nowPlayingBtn = document.getElementById('nowPlayingBtn');
     const songRequestBtn = document.getElementById('songRequestBtn');
     const chatSection = document.getElementById('chat');
 
-    // TEMP: replace this with your real now playing link page or dynamic logic later
+    const STATION_ID = 'mixman';
+    let spotifyDirectUrl = '';
+    let spotifySearchQuery = '';
+
+    async function updateNowPlaying() {
+      try {
+        const res = await fetch(`https://api.radiocult.fm/api/station/${STATION_ID}/schedule/live`);
+        const data = await res.json();
+
+        const result = data?.result;
+        if (!result) return;
+
+        const recognition = result.musicRecognition;
+        const metadata = result.metadata;
+
+        spotifyDirectUrl = '';
+        spotifySearchQuery = '';
+
+        // Best case: matched track with Spotify ID
+        if (
+          recognition &&
+          recognition.status === 'match' &&
+          recognition.metadata
+        ) {
+          const title = recognition.metadata.title || '';
+          const artist = recognition.metadata.artist || '';
+          const spotifyTrackId = recognition.metadata.spotifyTrackId || null;
+
+          if (spotifyTrackId) {
+            spotifyDirectUrl = `https://open.spotify.com/track/${spotifyTrackId}`;
+          }
+
+          spotifySearchQuery = [artist, title].filter(Boolean).join(' ').trim();
+          console.log('Matched song:', spotifySearchQuery, spotifyDirectUrl);
+          return;
+        }
+
+        // Fallback: regular metadata
+        const title = metadata?.title || '';
+        const artist = metadata?.artist || '';
+
+        // Ignore junk/generic titles
+        if (title && title.toLowerCase() !== 'live') {
+          spotifySearchQuery = [artist, title].filter(Boolean).join(' ').trim();
+        } else if (artist) {
+          spotifySearchQuery = artist.trim();
+        }
+
+        console.log('Fallback song:', spotifySearchQuery);
+      } catch (err) {
+        console.error('Could not fetch now playing:', err);
+      }
+    }
+
+    updateNowPlaying();
+    setInterval(updateNowPlaying, 10000);
+
     nowPlayingBtn.addEventListener('click', function (e) {
       e.preventDefault();
+
+      if (spotifyDirectUrl) {
+        window.open(spotifyDirectUrl, '_blank');
+        return;
+      }
+
+      if (spotifySearchQuery) {
+        window.open(`https://open.spotify.com/search/${encodeURIComponent(spotifySearchQuery)}`, '_blank');
+        return;
+      }
+
       window.open('https://open.spotify.com/', '_blank');
     });
 
-    // Scroll to chat when Song Requests is clicked
     songRequestBtn.addEventListener('click', function (e) {
       e.preventDefault();
       chatSection.scrollIntoView({
@@ -364,6 +429,5 @@
       });
     });
   </script>
-
 </body>
 </html>
