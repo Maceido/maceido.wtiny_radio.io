@@ -3,288 +3,220 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <meta property="og:title" content="WTinyRadio">
-  <meta property="og:description" content="Tune in to WTinyRadio live.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.wtinyradio.com/">
-  
-  <meta property="og:image" content="https://www.wtinyradio.com/link.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://www.wtinyradio.com/link.png?v=6">
-  <meta name="twitter:description" content="Tune in to WTinyRadio live.">
-  
-  
+
   <title>WTinyRadio</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <style>
-  * {
-    box-sizing: border-box;
-  }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-  a,
-  img,
-  iframe {
-    -webkit-tap-highlight-color: transparent;
-  }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      background: url('./background.png') center center no-repeat fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 20px 32px;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: default;
+    }
 
-  a,
-  .buttons img,
-  .logo-image {
-    user-select: none;
-    -webkit-user-select: none;
-  }
+    .container {
+      width: min(1280px, 100%);
+      text-align: center;
+      margin-top: -110px;
+      transform: translateX(40px);
+    }
 
-  a:focus,
-  a:focus-visible,
-  a:active {
-    outline: none;
-    box-shadow: none;
-  }
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
 
-  body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-    background: url('./background.png') center center no-repeat fixed;
-    background-size: cover;
-    background-color: #000;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 32px 20px;
-  }
+    .logo-image {
+      width: min(80%, 700px);
+      height: auto;
+      filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.6));
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      display: block;
+    }
 
-  .container {
-    transform: translateY(-100px);
-    width: min(1180px, 100%);
-    text-align: center;
-  }
+    .main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      gap: 18px;
+      align-items: stretch;
+      max-width: 1220px;
+      margin: -300px auto 0 auto;
+      transform: translateX(200px);
+    }
 
-  .logo-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 22px;
-  }
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 14px;
+    }
 
-  .logo-image {
-    width: min(80%);
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.6));
-  }
+    .player-shell,
+    .chat-shell,
+    .buttons {
+      background: linear-gradient(180deg, rgba(55, 23, 10, 0.9), rgba(20, 8, 5, 0.95));
+      border: 3px solid rgba(146, 81, 28, 0.95);
+      position: relative;
+      border-radius: 22px;
+      padding: 16px;
+    }
 
-  .main {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 260px;
-    gap: 18px;
-    align-items: center;
-    max-width: 1050px;
-    margin: 0 auto;
-  }
+    .player-shell {
+      box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.55),
+        0 0 0 2px rgba(62, 29, 10, 0.85) inset,
+        0 0 22px rgba(242, 155, 46, 0.18);
+    }
 
+    .chat-shell {
+      height: 100%;
+      box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.55),
+        0 0 0 2px rgba(62, 29, 10, 0.85) inset,
+        0 0 24px rgba(87, 157, 255, 0.18);
+    }
 
-  .player-shell {
-    background:
-      linear-gradient(180deg, rgba(55, 23, 10, 0.9), rgba(20, 8, 5, 0.95));
+    .player,
+    .chat-frame {
+      background: rgba(10, 8, 8, 0.28);
+      border-radius: 14px;
+      padding: 10px;
+    }
 
-    border: 3px solid rgba(146, 81, 28, 0.95);
-    border-radius: 22px;
-    box-shadow:
-      0 18px 35px rgba(0, 0, 0, 0.55),
-      0 0 0 2px rgba(62, 29, 10, 0.85) inset,
-      0 0 22px rgba(242, 155, 46, 0.18);
-    padding: 16px;
-    position: relative;
-  }
+    iframe {
+      outline: none;
+      border: none;
+      display: block;
+    }
 
-  .player-shell::before {
-    content: '';
-    position: absolute;
-    inset: 7px;
-    border: 2px solid rgba(208, 138, 57, 0.62);
-    border-radius: 15px;
-    pointer-events: none;
-    box-shadow: inset 0 0 16px rgba(255, 183, 77, 0.08);
-  }
+    .player iframe {
+      width: 100%;
+      height: 144px;
+      border-radius: 12px;
+      background: transparent;
+    }
 
-  .player {
-    position: relative;
-    z-index: 1;
-    background: rgba(10, 8, 8, 0.28);
-    border-radius: 14px;
-    padding: 10px;
-    box-shadow: inset 0 0 18px rgba(255, 174, 66, 0.06);
-  }
+    .chat-frame {
+      height: 100%;
+      display: flex;
+    }
 
-  iframe {
-    width: 100%;
-    height: 144px;
-    border: none;
-    border-radius: 12px;
-    background: transparent;
-  }
+    .chat-frame iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 680px;
+      border-radius: 12px;
+      flex: 1;
+      background: transparent;
+    }
 
- 
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
-    transform: translateY(2px);
+    .buttons {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 18px;
+    }
 
-    background:
+    .buttons a {
+      flex: 1;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      outline: none;
+    }
 
-      linear-gradient(180deg, rgba(55, 23, 10, 0.9), rgba(20, 8, 5, 0.95));
+    .buttons img {
+      width: 100%;
+      display: block;
+      transition: transform 0.2s;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
 
-    padding: 14px;
-    border-radius: 18px;
-    border: 2px solid rgba(146, 81, 28, 0.9);
-    box-shadow:
-      0 16px 28px rgba(0,0,0,0.55),
-      inset 0 0 0 2px rgba(62, 29, 10, 0.85),
-      0 0 18px rgba(242, 155, 46, 0.15);
-    position: relative;
-  }
+    .buttons a:hover img {
+      transform: scale(1.05);
+    }
 
-  .buttons::before {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border-radius: 12px;
-    border: 1.5px solid rgba(208, 138, 57, 0.55);
-    pointer-events: none;
-  }
+    @media (max-width: 980px) {
+      .container {
+        margin-top: 0;
+        transform: none;
+      }
 
-  .buttons a {
-    display: block;
-    text-decoration: none;
-  }
+      .main {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        transform: none;
+      }
 
-  .buttons img {
-    width: 400px;
-    max-width: 100%;
-    margin: 0 auto;
-  }
+      .left-column {
+        justify-content: flex-start;
+      }
 
-  .buttons a:hover img {
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* ================= MOBILE ONLY ================= */
-@media (max-width: 768px) {
-
-  body {
-    padding: 20px 14px 28px;
-    align-items: flex-start;
-    background-attachment: scroll;
-  }
-
-  /* STOP desktop upward shift ONLY on phone */
-  .container {
-    transform: none;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  /* STACK layout instead of side-by-side */
-  .main {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 100%;
-  }
-
-  .logo-wrap {
-    margin-bottom: 16px;
-  }
-
-  .logo-image {
-    width: 92%;
-    max-width: 420px;
-  }
-
-  /* PLAYER stays first */
-  .player-shell {
-    order: 1;
-    padding: 12px;
-    border-radius: 18px;
-  }
-
-  iframe {
-    width: 100%;
-    height: 170px;
-    border-radius: 10px;
-  }
-
-  /* BUTTONS go under player */
-  .buttons {
-    order: 2;
-    width: 100%;
-    padding: 12px;
-    gap: 10px;
-    transform: none;
-  }
-
-  .buttons a {
-    width: 100%;
-  }
-
-  .buttons img {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-/* EXTRA SMALL PHONES */
-@media (max-width: 480px) {
-  body {
-    padding: 16px 10px 24px;
-  }
-
-  iframe {
-    height: 160px;
-  }
-
-  .buttons {
-    padding: 10px;
-    gap: 8px;
-  }
-}
-</style>
+      .chat-frame iframe {
+        min-height: 520px;
+      }
+    }
+  </style>
 </head>
 <body>
+
   <div class="container">
     <div class="logo-wrap">
       <img class="logo-image" src="./logo.png" alt="WTINY Radio">
     </div>
 
     <div class="main">
-      <div class="player-shell">
-        <div class="player">
-          <iframe src="https://app.radiocult.fm/embed/player/mixman?theme=dusk&primaryColor=%23f5b623&corners=rounded&playerDisplay=metadata" title="WTINY Radio Player"></iframe>
+      <div class="left-column">
+        <div class="player-shell">
+          <div class="player">
+            <iframe
+              src="https://app.radiocult.fm/embed/player/mixman?theme=dusk&primaryColor=%23f5b623&corners=rounded&playerDisplay=metadata"
+              title="WTINY Radio Player">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <a href="#"><img src="./now-playing.png" alt="Now Playing"></a>
+          <a href="#"><img src="./song-requests.png" alt="Song Requests"></a>
+          <a href="mailto:support@wtinyradio.com"><img src="./contact.png" alt="Contact"></a>
         </div>
       </div>
 
-      <div class="buttons">
-        <a href="#">
-          <img src="./now-playing.png" alt="Now Playing">
-        </a>
-        <a href="#">
-          <img src="./song-requests.png" alt="Song Requests">
-        </a>
-        <a href="mailto:support@wtinyradio.com">
-          <img src="./contact.png" alt="Contact">
-        </a>
+      <div class="chat-shell">
+        <div class="chat-frame">
+          <iframe
+            src="https://app.radiocult.fm/embed/chat/mixman?theme=midnight&primaryColor=%23579DFF&corners=rounded&playerDisplay=metadata"
+            title="WTINY Radio Chat">
+          </iframe>
+        </div>
       </div>
     </div>
   </div>
+
 </body>
 </html>
