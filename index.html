@@ -23,7 +23,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: white;
   background: #000 url('./background.png') center center no-repeat fixed;
-  background-size: contain;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -31,7 +31,7 @@ body {
   padding: 24px 20px 32px;
 }
 
-/* ====== LAYOUT (UNCHANGED) ====== */
+/* ====== LAYOUT ====== */
 
 .container {
   width: min(1280px, 100%);
@@ -73,7 +73,8 @@ body {
 
 .player-shell,
 .chat-shell,
-.buttons {
+.buttons,
+.mobile-chat-toggle {
   position: relative;
   border-radius: 22px;
   padding: 16px;
@@ -97,7 +98,6 @@ body {
   inset: 0;
   padding: 2px;
   border-radius: inherit;
-
   background:
     linear-gradient(90deg,
       transparent 0%,
@@ -105,7 +105,6 @@ body {
       rgba(255,230,180,0.95) 50%,
       transparent 60%,
       transparent 100%);
-
   background-size: 300% 100%;
   animation: ledMove 4s linear infinite;
 
@@ -132,7 +131,6 @@ body {
   inset: 0;
   padding: 2px;
   border-radius: inherit;
-
   background:
     linear-gradient(90deg,
       transparent 0%,
@@ -140,7 +138,6 @@ body {
       rgba(140,220,255,0.95) 50%,
       transparent 65%,
       transparent 100%);
-
   background-size: 320% 100%;
   animation: ledMove 5.5s linear infinite;
 
@@ -164,13 +161,13 @@ body {
   border: 2px solid rgba(255,170,50,0.25);
 }
 
-.buttons::before {
+.buttons::before,
+.mobile-chat-toggle::before {
   content: "";
   position: absolute;
   inset: 0;
   padding: 2px;
   border-radius: inherit;
-
   background:
     linear-gradient(90deg,
       transparent 0%,
@@ -178,7 +175,6 @@ body {
       rgba(255,240,200,0.95) 50%,
       transparent 60%,
       transparent 100%);
-
   background-size: 300% 100%;
   animation: ledMove 3.5s linear infinite;
 
@@ -222,7 +218,7 @@ iframe {
   border-radius: 12px;
 }
 
-/* ===== BUTTONS ===== */
+/* ===== BUTTON IMAGES ===== */
 
 .buttons a {
   flex: 1;
@@ -242,6 +238,83 @@ iframe {
   transform: scale(0.98);
 }
 
+/* ===== MOBILE CHAT BUTTON ===== */
+
+.mobile-chat-toggle {
+  display: none;
+  padding: 12px;
+  border-radius: 18px;
+  border: 2px solid rgba(90,175,255,0.25);
+}
+
+.mobile-chat-toggle button {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: white;
+  background: linear-gradient(180deg, rgba(80,160,255,0.95), rgba(30,90,180,0.95));
+  box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+
+/* ===== FULLSCREEN MOBILE CHAT ===== */
+
+.chat-close {
+  display: none;
+}
+
+.chat-shell.mobile-open {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  border-radius: 0;
+  padding: 14px;
+  background:
+    linear-gradient(180deg, rgba(10,10,16,0.96), rgba(5,5,10,0.98));
+}
+
+.chat-shell.mobile-open .chat-frame {
+  height: calc(100dvh - 28px);
+  padding-top: 58px;
+}
+
+.chat-shell.mobile-open .chat-frame iframe {
+  min-height: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.chat-shell.mobile-open .chat-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10000;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: white;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+
 /* ===== ANIMATION ===== */
 
 @keyframes ledMove {
@@ -255,11 +328,25 @@ iframe {
   body {
     align-items: flex-start;
     background-attachment: scroll;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100dvh;
+    padding: 18px 14px 24px;
   }
 
   .container {
     margin-top: 0;
     transform: none;
+    width: 100%;
+  }
+
+  .logo-wrap {
+    margin-bottom: 12px;
+  }
+
+  .logo-image {
+    width: min(92%, 520px);
   }
 
   .main {
@@ -267,6 +354,32 @@ iframe {
     flex-direction: column;
     transform: none;
     margin: 0 auto;
+    gap: 14px;
+  }
+
+  .left-column {
+    gap: 12px;
+  }
+
+  .player iframe {
+    height: 130px;
+  }
+
+  .mobile-chat-toggle {
+    display: block;
+  }
+
+  .chat-shell {
+    display: none;
+  }
+
+  .chat-shell.mobile-open {
+    display: block;
+  }
+
+  .buttons {
+    gap: 8px;
+    padding: 10px;
   }
 }
 </style>
@@ -276,7 +389,7 @@ iframe {
 
 <div class="container">
   <div class="logo-wrap">
-    <img class="logo-image" src="./logo.png">
+    <img class="logo-image" src="./logo.png" alt="WTinyRadio Logo">
   </div>
 
   <div class="main">
@@ -293,17 +406,23 @@ iframe {
 
       <div class="buttons">
         <a href="#" id="nowPlayingBtn">
-          <img src="./now-playing.png">
+          <img src="./now-playing.png" alt="Now Playing">
         </a>
 
         <a href="mailto:support@wtinyradio.com">
-          <img src="./contact.png">
+          <img src="./contact.png" alt="Contact">
         </a>
+      </div>
+
+      <div class="mobile-chat-toggle">
+        <button id="openChatBtn" type="button">OPEN CHAT</button>
       </div>
 
     </div>
 
-    <div class="chat-shell">
+    <div class="chat-shell" id="chatShell">
+      <button class="chat-close" id="closeChatBtn" type="button">MINIMIZE</button>
+
       <div class="chat-frame">
         <iframe
           src="https://app.radiocult.fm/embed/chat/mixman?theme=midnight&primaryColor=%23579DFF&corners=rounded">
@@ -316,10 +435,38 @@ iframe {
 
 <script>
 const nowPlayingBtn = document.getElementById('nowPlayingBtn');
+const openChatBtn = document.getElementById('openChatBtn');
+const closeChatBtn = document.getElementById('closeChatBtn');
+const chatShell = document.getElementById('chatShell');
 
 const STATION_ID = 'mixman';
 let spotifyDirectUrl = '';
 let spotifySearchQuery = '';
+
+function isMobileView() {
+  return window.innerWidth <= 980;
+}
+
+function openMobileChat() {
+  if (!isMobileView()) return;
+  chatShell.classList.add('mobile-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileChat() {
+  chatShell.classList.remove('mobile-open');
+  document.body.style.overflow = '';
+}
+
+openChatBtn?.addEventListener('click', openMobileChat);
+closeChatBtn?.addEventListener('click', closeMobileChat);
+
+window.addEventListener('resize', () => {
+  if (!isMobileView()) {
+    chatShell.classList.remove('mobile-open');
+    document.body.style.overflow = '';
+  }
+});
 
 async function updateNowPlaying() {
   try {
@@ -344,13 +491,13 @@ async function updateNowPlaying() {
         spotifyDirectUrl = `https://open.spotify.com/track/${id}`;
       }
 
-      spotifySearchQuery = `${artist} ${title}`;
+      spotifySearchQuery = `${artist} ${title}`.trim();
       return;
     }
 
     const title = metadata?.title || '';
     const artist = metadata?.artist || '';
-    spotifySearchQuery = `${artist} ${title}`;
+    spotifySearchQuery = `${artist} ${title}`.trim();
 
   } catch {}
 }
@@ -362,9 +509,9 @@ nowPlayingBtn.addEventListener('click', e => {
   e.preventDefault();
 
   if (spotifyDirectUrl) {
-    window.open(spotifyDirectUrl);
+    window.open(spotifyDirectUrl, '_blank');
   } else if (spotifySearchQuery) {
-    window.open(`https://open.spotify.com/search/${encodeURIComponent(spotifySearchQuery)}`);
+    window.open(`https://open.spotify.com/search/${encodeURIComponent(spotifySearchQuery)}`, '_blank');
   }
 });
 </script>
