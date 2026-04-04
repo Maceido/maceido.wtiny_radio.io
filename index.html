@@ -144,10 +144,6 @@
     .buttons a {
       flex: 1;
       text-decoration: none;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-user-drag: none;
-      outline: none;
       display: block;
     }
 
@@ -155,9 +151,6 @@
       width: 100%;
       display: block;
       transition: transform 0.2s ease;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-user-drag: none;
       pointer-events: none;
     }
 
@@ -191,14 +184,6 @@
         transform: none;
       }
 
-      .left-column {
-        justify-content: flex-start;
-      }
-
-      .logo-wrap {
-        margin-bottom: 14px;
-      }
-
       .logo-image {
         width: min(92%, 460px);
       }
@@ -210,60 +195,10 @@
 
     /* PHONE */
     @media (max-width: 768px) {
-      body {
-        padding: 12px 10px 18px;
-      }
-
-      .container {
-        width: 100%;
-      }
-
-      .logo-wrap {
-        margin-bottom: 12px;
-      }
-
-      .logo-image {
-        width: 92%;
-        max-width: 320px;
-      }
-
-      .main {
-        gap: 12px;
-      }
-
-      .left-column {
-        gap: 10px;
-      }
-
-      .player-shell,
-      .chat-shell,
-      .buttons {
-        border-radius: 18px;
-        padding: 10px;
-      }
-
-      .player,
-      .chat-frame {
-        padding: 8px;
-        border-radius: 12px;
-      }
-
-      .player iframe {
-        height: 160px;
-      }
-
       .buttons {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-      }
-
-      .buttons a:nth-child(3) {
-        grid-column: 1 / -1;
-      }
-
-      .buttons a:hover img {
-        transform: none;
       }
 
       .chat-frame iframe {
@@ -273,25 +208,12 @@
 
     /* SMALL PHONES */
     @media (max-width: 480px) {
-      .logo-image {
-        width: 96%;
-        max-width: 280px;
-      }
-
-      .player iframe {
-        height: 170px;
-      }
-
-      .chat-frame iframe {
-        min-height: 320px;
-      }
-
       .buttons {
         grid-template-columns: 1fr;
       }
 
-      .buttons a:nth-child(3) {
-        grid-column: auto;
+      .chat-frame iframe {
+        min-height: 320px;
       }
     }
   </style>
@@ -316,14 +238,8 @@
         </div>
 
         <div class="buttons">
-          <!-- Change this link to your Spotify / now playing page -->
           <a href="#" id="nowPlayingBtn">
             <img src="./now-playing.png" alt="Now Playing">
-          </a>
-
-          <!-- Change this link if you want it to open a request form instead -->
-          <a href="#chat" id="songRequestBtn">
-            <img src="./chat.png" alt="Song Requests">
           </a>
 
           <a href="mailto:support@wtinyradio.com">
@@ -332,7 +248,7 @@
         </div>
       </div>
 
-      <div class="chat-shell" id="chat">
+      <div class="chat-shell">
         <div class="chat-frame">
           <iframe
             src="https://app.radiocult.fm/embed/chat/mixman?theme=midnight&primaryColor=%23579DFF&corners=rounded&playerDisplay=metadata"
@@ -343,10 +259,9 @@
       </div>
     </div>
   </div>
+
   <script>
     const nowPlayingBtn = document.getElementById('nowPlayingBtn');
-    const songRequestBtn = document.getElementById('songRequestBtn');
-    const chatSection = document.getElementById('chat');
 
     const STATION_ID = 'mixman';
     let spotifyDirectUrl = '';
@@ -366,12 +281,7 @@
         spotifyDirectUrl = '';
         spotifySearchQuery = '';
 
-        // Best case: matched track with Spotify ID
-        if (
-          recognition &&
-          recognition.status === 'match' &&
-          recognition.metadata
-        ) {
+        if (recognition && recognition.status === 'match' && recognition.metadata) {
           const title = recognition.metadata.title || '';
           const artist = recognition.metadata.artist || '';
           const spotifyTrackId = recognition.metadata.spotifyTrackId || null;
@@ -381,22 +291,17 @@
           }
 
           spotifySearchQuery = [artist, title].filter(Boolean).join(' ').trim();
-          console.log('Matched song:', spotifySearchQuery, spotifyDirectUrl);
           return;
         }
 
-        // Fallback: regular metadata
         const title = metadata?.title || '';
         const artist = metadata?.artist || '';
 
-        // Ignore junk/generic titles
         if (title && title.toLowerCase() !== 'live') {
           spotifySearchQuery = [artist, title].filter(Boolean).join(' ').trim();
         } else if (artist) {
           spotifySearchQuery = artist.trim();
         }
-
-        console.log('Fallback song:', spotifySearchQuery);
       } catch (err) {
         console.error('Could not fetch now playing:', err);
       }
@@ -420,14 +325,7 @@
 
       window.open('https://open.spotify.com/', '_blank');
     });
-
-    songRequestBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      chatSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    });
   </script>
+
 </body>
 </html>
