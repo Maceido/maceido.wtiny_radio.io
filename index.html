@@ -29,7 +29,8 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 40px 20px;
+      padding: 8px 20px 12px;
+      overflow-y: hidden;
     }
 
     .container {
@@ -37,62 +38,56 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 4px;
     }
 
     .logo-wrap {
       display: flex;
       justify-content: center;
-      align-items: center;
       width: 100%;
     }
 
     .logo-image {
-      width: min(80%, 700px);
+      width: min(70%, 560px);
       height: auto;
       display: block;
-      margin-bottom: 10px;
       filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.6));
     }
 
     .main {
       display: grid;
-      grid-template-columns: 320px minmax(0, 1fr) 400px;
-      gap: 18px;
+      grid-template-columns: 360px minmax(0, 1fr) 360px;
+      gap: 22px;
       width: 100%;
-      max-width: 1400px;
+      max-width: 1280px;
       align-items: stretch;
-      margin-top: -300px;
-      margin-left: 120px;
+      margin-top: -18px;
     }
 
-    .history-column,
     .left-column {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      gap: 14px;
     }
 
     .player-shell,
     .chat-shell,
-    .buttons,
-    .mobile-chat-toggle,
-    .history-shell {
+    .schedule-shell,
+    .buttons {
       position: relative;
       border-radius: 22px;
       padding: 16px;
       overflow: hidden;
-      background: linear-gradient(180deg, rgba(35,14,8,0.72), rgba(14,5,4,0.86));
-      box-shadow: 0 18px 35px rgba(0,0,0,0.55);
+      background: linear-gradient(180deg, rgba(35, 14, 8, 0.72), rgba(14, 5, 4, 0.86));
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.55);
     }
 
     .player-shell {
-      border: 2px solid rgba(255,170,50,0.3);
+      border: 2px solid rgba(255, 170, 50, 0.3);
       box-shadow:
-        0 0 6px rgba(255,170,50,0.35),
-        0 0 14px rgba(255,140,30,0.25),
-        0 18px 35px rgba(0,0,0,0.55);
+        0 0 6px rgba(255, 170, 50, 0.35),
+        0 0 14px rgba(255, 140, 30, 0.25),
+        0 18px 35px rgba(0, 0, 0, 0.55);
     }
 
     .player-shell::before {
@@ -105,7 +100,7 @@
         90deg,
         transparent 0%,
         transparent 40%,
-        rgba(255,230,180,0.95) 50%,
+        rgba(255, 230, 180, 0.95) 50%,
         transparent 60%,
         transparent 100%
       );
@@ -117,21 +112,24 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       filter:
-        drop-shadow(0 0 6px rgba(255,200,120,0.9))
-        drop-shadow(0 0 16px rgba(255,140,40,0.5));
+        drop-shadow(0 0 6px rgba(255, 200, 120, 0.9))
+        drop-shadow(0 0 16px rgba(255, 140, 40, 0.5));
       pointer-events: none;
     }
 
-    .history-shell {
+    .schedule-shell {
+      display: flex;
+      flex-direction: column;
       height: 100%;
-      border: 2px solid rgba(255,170,50,0.24);
+      width: 100%;
+      border: 2px solid rgba(255, 170, 50, 0.24);
       box-shadow:
-        0 0 6px rgba(255,170,50,0.18),
-        0 0 14px rgba(255,140,30,0.14),
-        0 18px 35px rgba(0,0,0,0.55);
+        0 0 6px rgba(255, 170, 50, 0.18),
+        0 0 14px rgba(255, 140, 30, 0.14),
+        0 18px 35px rgba(0, 0, 0, 0.55);
     }
 
-    .history-shell::before {
+    .schedule-shell::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -141,7 +139,7 @@
         90deg,
         transparent 0%,
         transparent 35%,
-        rgba(255,230,180,0.92) 50%,
+        rgba(255, 230, 180, 0.92) 50%,
         transparent 65%,
         transparent 100%
       );
@@ -153,14 +151,17 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       filter:
-        drop-shadow(0 0 5px rgba(255,210,130,0.75))
-        drop-shadow(0 0 14px rgba(255,140,40,0.35));
+        drop-shadow(0 0 5px rgba(255, 210, 130, 0.75))
+        drop-shadow(0 0 14px rgba(255, 140, 40, 0.35));
       pointer-events: none;
     }
 
     .chat-shell {
+      display: flex;
+      flex-direction: column;
       height: 100%;
-      border: 2px solid rgba(90,175,255,0.25);
+      width: 100%;
+      border: 2px solid rgba(90, 175, 255, 0.25);
     }
 
     .chat-shell::before {
@@ -173,7 +174,7 @@
         90deg,
         transparent 0%,
         transparent 35%,
-        rgba(140,220,255,0.95) 50%,
+        rgba(140, 220, 255, 0.95) 50%,
         transparent 65%,
         transparent 100%
       );
@@ -185,21 +186,19 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       filter:
-        drop-shadow(0 0 6px rgba(140,220,255,0.9))
-        drop-shadow(0 0 18px rgba(255,145,30,0.35));
+        drop-shadow(0 0 6px rgba(140, 220, 255, 0.9))
+        drop-shadow(0 0 18px rgba(255, 145, 30, 0.35));
       pointer-events: none;
     }
 
     .buttons {
       display: flex;
       gap: 10px;
-      padding: 12px;
-      border-radius: 18px;
-      border: 2px solid rgba(255,170,50,0.25);
+      margin-top: 10px;
+      border: 2px solid rgba(255, 170, 50, 0.25);
     }
 
-    .buttons::before,
-    .mobile-chat-toggle::before {
+    .buttons::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -209,7 +208,7 @@
         90deg,
         transparent 0%,
         transparent 40%,
-        rgba(255,240,200,0.95) 50%,
+        rgba(255, 240, 200, 0.95) 50%,
         transparent 60%,
         transparent 100%
       );
@@ -221,19 +220,25 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       filter:
-        drop-shadow(0 0 6px rgba(255,200,120,0.8))
-        drop-shadow(0 0 14px rgba(255,130,20,0.45));
+        drop-shadow(0 0 6px rgba(255, 200, 120, 0.8))
+        drop-shadow(0 0 14px rgba(255, 130, 20, 0.45));
       pointer-events: none;
     }
 
     .player,
     .chat-frame,
-    .history-frame {
+    .schedule-frame {
       background: rgba(10, 8, 8, 0.28);
       border-radius: 14px;
       padding: 10px;
       position: relative;
       z-index: 1;
+    }
+
+    .schedule-frame,
+    .chat-frame {
+      flex: 1;
+      display: flex;
     }
 
     iframe {
@@ -243,84 +248,18 @@
     }
 
     .player iframe {
+      width: 100%;
       height: 150px;
       border-radius: 12px;
     }
 
+    .schedule-frame iframe,
     .chat-frame iframe {
+      width: 100%;
       height: 100%;
-      min-height: 680px;
+      min-height: 580px;
       border-radius: 12px;
-    }
-
-    .history-frame {
-      height: 680px;
-      overflow-y: auto;
-      text-align: left;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255, 170, 50, 0.4) transparent;
-    }
-
-    .history-frame::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .history-frame::-webkit-scrollbar-thumb {
-      background: rgba(255, 170, 50, 0.35);
-      border-radius: 999px;
-    }
-
-    .history-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #ffd28a;
-      margin: 0 0 12px 0;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-align: center;
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .history-item {
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 170, 50, 0.10);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
-    }
-
-    .history-item strong {
-      display: block;
-      color: #fff;
-      font-size: 13px;
-      line-height: 1.35;
-      margin-bottom: 3px;
-    }
-
-    .history-item span {
-      display: block;
-      color: #d6c5b3;
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .history-time {
-      color: #f0b45b !important;
-      font-size: 11px !important;
-      margin-top: 4px;
-    }
-
-    .history-empty,
-    .history-loading {
-      color: #d6c5b3;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 13px;
+      background: transparent;
     }
 
     .buttons a {
@@ -346,79 +285,6 @@
       transform: scale(0.98);
     }
 
-    .mobile-chat-toggle {
-      display: none;
-      padding: 12px;
-      border-radius: 18px;
-      border: 2px solid rgba(90,175,255,0.25);
-      position: relative;
-    }
-
-    .mobile-chat-toggle button {
-      width: 100%;
-      position: relative;
-      z-index: 2;
-      border: none;
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 15px;
-      color: white;
-      background: linear-gradient(180deg, rgba(80,160,255,0.95), rgba(30,90,180,0.95));
-      box-shadow: 0 10px 20px rgba(0,0,0,0.35);
-      cursor: pointer;
-    }
-
-    .chat-close {
-      display: none;
-    }
-
-    .chat-shell.mobile-open {
-      display: block;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      width: 100vw;
-      height: 100dvh;
-      max-width: none;
-      border-radius: 0;
-      padding: 12px;
-      background: linear-gradient(180deg, rgba(10,10,16,0.96), rgba(5,5,10,0.98));
-    }
-
-    .chat-shell.mobile-open .chat-frame {
-      height: calc(100dvh - 24px);
-      padding-top: 56px;
-    }
-
-    .chat-shell.mobile-open .chat-frame iframe {
-      min-height: 100%;
-      height: 100%;
-      border-radius: 12px;
-    }
-
-    .chat-shell.mobile-open .chat-close {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      z-index: 10000;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      color: white;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-      cursor: pointer;
-    }
-
     @keyframes ledMove {
       0% { background-position: 0% 0; }
       100% { background-position: 300% 0; }
@@ -426,19 +292,20 @@
 
     @media (max-width: 1280px) {
       .main {
-        grid-template-columns: 280px minmax(0, 1fr) 360px;
+        grid-template-columns: 340px minmax(0, 1.1fr) 340px;
+        max-width: 1160px;
       }
     }
 
     @media (max-width: 980px) {
       body {
         align-items: flex-start;
-        justify-content: flex-start;
         background-attachment: scroll;
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 10px 12px 16px;
+        overflow-y: auto;
       }
 
       .container {
@@ -448,72 +315,44 @@
 
       .logo-image {
         width: min(86%, 380px);
-        margin-bottom: 0;
       }
 
       .main {
         display: flex;
         flex-direction: column;
-        gap: 10px;
         max-width: 100%;
+        margin-top: 8px;
+        gap: 12px;
       }
 
-      .history-column,
       .left-column {
-        gap: 10px;
-      }
-
-      .history-shell,
-      .player-shell {
-        padding: 8px;
-      }
-
-      .history-frame,
-      .player {
-        padding: 6px;
-      }
-
-      .history-frame {
-        height: 300px;
-      }
-
-      .player iframe {
-        height: 170px;
-      }
-
-      .buttons {
-        gap: 8px;
-        padding: 8px;
-      }
-
-      .mobile-chat-toggle {
         display: block;
-        padding: 8px;
       }
 
-      .chat-shell {
-        display: none;
-      }
-
-      .chat-shell.mobile-open {
-        display: block;
+      .schedule-frame iframe,
+      .chat-frame iframe {
+        min-height: 300px;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
+
     <div class="logo-wrap">
       <img class="logo-image" src="./logo.png" alt="WTinyRadio Logo">
     </div>
 
     <div class="main">
-      <div class="history-column">
-        <div class="history-shell">
-          <div class="history-frame">
-            <div class="history-title">Recently Played</div>
-            <div id="historyList" class="history-loading">Loading recent tracks...</div>
-          </div>
+
+      <div class="schedule-shell">
+        <div class="schedule-frame">
+          <iframe
+            src="https://app.radiocult.fm/embed/schedule/mixman/show-list?theme=dusk&primaryColor=%23579DFF&corners=rounded&removeRcBranding=true"
+            title="WTINY Radio Schedule"
+            loading="lazy">
+          </iframe>
         </div>
       </div>
 
@@ -521,7 +360,7 @@
         <div class="player-shell">
           <div class="player">
             <iframe
-              src="https://app.radiocult.fm/embed/player/mixman?theme=dusk&primaryColor=%23f5b623&corners=rounded&playerDisplay=metadata"
+              src="https://app.radiocult.fm/embed/player/mixman?theme=dusk&primaryColor=%23579DFF&corners=rounded&playerDisplay=metadata&removeRcBranding=true"
               title="WTINY Radio Player"
               loading="lazy">
             </iframe>
@@ -537,142 +376,25 @@
             <img src="./contact.png" alt="Contact">
           </a>
         </div>
-
-        <div class="mobile-chat-toggle">
-          <button id="openChatBtn" type="button">OPEN CHAT</button>
-        </div>
       </div>
 
-      <div class="chat-shell" id="chatShell">
-        <button class="chat-close" id="closeChatBtn" type="button">MINIMIZE</button>
-
+      <div class="chat-shell">
         <div class="chat-frame">
           <iframe
-            src="https://app.radiocult.fm/embed/chat/mixman?theme=midnight&primaryColor=%23579DFF&corners=rounded"
+            src="https://app.radiocult.fm/embed/chat/mixman?theme=midnight&primaryColor=%23579DFF&corners=rounded&removeRcBranding=true"
             title="WTINY Radio Chat"
             loading="lazy">
           </iframe>
         </div>
       </div>
+
     </div>
   </div>
 
   <script>
-    const nowPlayingBtn = document.getElementById('nowPlayingBtn');
-    const openChatBtn = document.getElementById('openChatBtn');
-    const closeChatBtn = document.getElementById('closeChatBtn');
-    const chatShell = document.getElementById('chatShell');
-    const historyList = document.getElementById('historyList');
-
     const STATION_ID = 'mixman';
     let spotifyDirectUrl = '';
     let spotifySearchQuery = '';
-
-    function isMobileView() {
-      return window.innerWidth <= 980;
-    }
-
-    function openMobileChat() {
-      if (!isMobileView()) return;
-      chatShell.classList.add('mobile-open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMobileChat() {
-      chatShell.classList.remove('mobile-open');
-      document.body.style.overflow = '';
-    }
-
-    function escapeHtml(value) {
-      return String(value ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    function formatTime(value) {
-      if (!value) return '';
-
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return '';
-
-      return date.toLocaleTimeString([], {
-        hour: 'numeric',
-        minute: '2-digit'
-      });
-    }
-
-    async function loadHistory() {
-      try {
-        const res = await fetch(`https://api.radiocult.fm/api/station/${STATION_ID}/history`);
-        const data = await res.json();
-
-        const items =
-          data?.result ||
-          data?.results ||
-          data?.history ||
-          data?.tracks ||
-          [];
-
-        if (!Array.isArray(items) || !items.length) {
-          historyList.className = 'history-empty';
-          historyList.innerHTML = 'No recent tracks found.';
-          return;
-        }
-
-        const visibleItems = items.slice(0, 15);
-
-        historyList.className = 'history-list';
-        historyList.innerHTML = visibleItems.map((track) => {
-          const title =
-            track?.title ||
-            track?.metadata?.title ||
-            'Unknown Track';
-
-          const artist =
-            track?.artist ||
-            track?.metadata?.artist ||
-            'Unknown Artist';
-
-          const playedAt =
-            track?.playedAt ||
-            track?.played_at ||
-            track?.createdAt ||
-            track?.timestamp ||
-            '';
-
-          const timeLabel = formatTime(playedAt);
-
-          return `
-            <div class="history-item">
-              <strong>${escapeHtml(title)}</strong>
-              <span>${escapeHtml(artist)}</span>
-              ${timeLabel ? `<span class="history-time">${escapeHtml(timeLabel)}</span>` : ''}
-            </div>
-          `;
-        }).join('');
-      } catch (err) {
-        console.log('History fetch failed:', err);
-        historyList.className = 'history-empty';
-        historyList.innerHTML = 'Could not load recent tracks.';
-      }
-    }
-
-    if (openChatBtn) {
-      openChatBtn.addEventListener('click', openMobileChat);
-    }
-
-    if (closeChatBtn) {
-      closeChatBtn.addEventListener('click', closeMobileChat);
-    }
-
-    window.addEventListener('resize', () => {
-      if (!isMobileView()) {
-        closeMobileChat();
-      }
-    });
 
     async function updateNowPlaying() {
       try {
@@ -701,31 +423,24 @@
           return;
         }
 
-        const title = metadata?.title || '';
-        const artist = metadata?.artist || '';
-        spotifySearchQuery = `${artist} ${title}`.trim();
+        spotifySearchQuery = `${metadata?.artist || ''} ${metadata?.title || ''}`.trim();
       } catch (err) {
         console.log('Now playing fetch failed:', err);
       }
     }
 
     updateNowPlaying();
-    loadHistory();
-
     setInterval(updateNowPlaying, 10000);
-    setInterval(loadHistory, 20000);
 
-    if (nowPlayingBtn) {
-      nowPlayingBtn.addEventListener('click', function(e) {
-        e.preventDefault();
+    document.getElementById('nowPlayingBtn').onclick = (e) => {
+      e.preventDefault();
 
-        if (spotifyDirectUrl) {
-          window.open(spotifyDirectUrl, '_blank');
-        } else if (spotifySearchQuery) {
-          window.open(`https://open.spotify.com/search/${encodeURIComponent(spotifySearchQuery)}`, '_blank');
-        }
-      });
-    }
+      if (spotifyDirectUrl) {
+        window.open(spotifyDirectUrl, '_blank');
+      } else if (spotifySearchQuery) {
+        window.open(`https://open.spotify.com/search/${encodeURIComponent(spotifySearchQuery)}`, '_blank');
+      }
+    };
   </script>
 </body>
 </html>
